@@ -1,19 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../static/styles.css">
-	<title>Farmacia</title>
-</head>
-<body>
-	<div class="titulo">
-		<h1>Farmacia Primavera</h1>
+{% extends '/layout.html' %}
+
+{% block styles %}
+	{{ super() }}
+	<link rel="stylesheet" href="{{  url_for('static', path='index.css') }}">
+{% endblock %}
+
+{% block content %}
+	<div class="ingreso">
+		<a href="#">Ingresar</a>
+		<a href="#">Registrarse</a>
 	</div>
-	<div class="pie-pagina">
-		<p>Powered by Jose Modad</p>
-	</div>	
-	<script src="../static/main.js"></script>
-</body>
-</html>
+
+{% endblock %}
+
+{% block content1 %}
+	<div class="tit">
+		<h2>Bienvenidos a nuestra Farmacia</h2>
+		<p class="parra">Aca puedes encontrar todo lo que necesites para tu salud</p>
+	</div>
+{% endblock %}

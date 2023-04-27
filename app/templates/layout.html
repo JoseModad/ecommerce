@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Corinthia&family=Vina+Sans&display=swap" rel="stylesheet">
+	{% block styles %}
+		<link rel="stylesheet" href="{{  url_for('static', path='layout.css') }}">
+	{% endblock %}
+	<title>Farmacia</title>
+</head>
+<body>
+	<div class="container">
+		<div class="titulo">
+			<h1>
+				<span class="palabra1">FARMACIA</span><br>
+				<span class="palabra2">Primavera I</span>
+			</h1>
+		</div>
+		{% block content %}{% endblock %}		
+			
+		{% block content1 %}{% endblock %}
+		<footer class="pie-pagina">
+			<div class="container-footer">
+				<div class="categoria">
+					<h4>Institucional</h4>
+					<ul>
+						<li>Nosotros</li>
+						<li>Proveedores</li>
+					</ul>				
+				</div>
+				<div class="categoria">
+					<h4>Productos</h4>
+					<ul>
+						<li>Ofertas</li>
+						<li>Perfumeria</li>
+						<li>Destacados</li>
+					</ul>				
+				</div>
+				<div class="categoria">
+					<h4>Compra Online</h4>
+					<ul>
+						<li>Carrito</li>
+						<li>Formas de Pago</li>
+						<li>Entregas</li>
+					</ul>				
+				</div>
+				<div class="categoria">
+					<h4>Atencion al Cliente</h4>
+					<ul>
+						<li>Telefono:</li>
+						<li>0387-4341089</li>
+						<li>Whatsapp</li>
+						<li>0387-4341089</li>
+					</ul>				
+				</div>
+			</div>
+		</footer>
+	</div>	
+	<script src="../static/main.js"></script>
+</body>
+</html>
