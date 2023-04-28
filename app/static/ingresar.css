@@ -1,0 +1,45 @@
+.tit {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 20vh;
+	margin-bottom: 5vh;
+}
+
+.parra, h2 {
+	text-align: center;
+}
+
+form {
+	width: 60vh;
+	margin: auto;
+	padding: 20px;
+	border: 2px solid #ccc;
+	border-radius: 10px;
+}
+
+label {
+	display: block;
+	margin-bottom: 10px;
+	font-size: 2.5vh;
+}
+
+input {
+	display: block;
+	margin-bottom: 20px;
+	width: 100%;
+	padding: 10px;
+	font-size: 2.5vh;
+	border-radius: 5px;
+	border: 2px solid #ccc;
+}
+
+button {
+	background-color: rgb(55, 216, 55);
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	font-size: 2.5vh;
+}

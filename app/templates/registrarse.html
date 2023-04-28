@@ -1,0 +1,57 @@
+{% extends '/layout.html' %}
+
+{% block styles %}
+	{{ super() }}
+	<link rel="stylesheet" href="{{  url_for('static', path='registrarse.css') }}">
+{% endblock %}
+
+{% block content %}
+
+	<div class="tit">
+		<h2>Registrarse</h2>
+		<p class="parra">Registrate para poder comprar y obtener descuentos y acceder a las ofertas</p>
+		<br>
+		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus veritatis, iusto sed, exercitationem amet expedita numquam aspernatur rem optio in quidem doloremque? Eveniet unde minima ab dolore. Veniam beatae, voluptatum vitae iusto aut officia molestiae quam modi quia iste praesentium excepturi, voluptate repellat alias minima numquam repudiandae vel perspiciatis, doloribus facere. Quod sint itaque in ullam ab aliquam, harum voluptatum repellendus voluptates! Nulla ratione velit tenetur! Dicta, libero praesentium. Officiis laboriosam facilis eos. Molestiae, atque, omnis sunt ab id eius tempora nihil aperiam ea ipsum optio repellat aliquam dolor maxime eos aut commodi voluptatibus quidem quae, praesentium esse dicta vel veritatis architecto? Delectus veniam adipisci minima voluptatibus laborum laudantium aspernatur eaque deserunt. Excepturi, atque provident vel deserunt quibusdam nemo, velit ipsam sequi accusantium culpa rem quisquam, commodi perspiciatis eveniet ipsum hic magni quae qui obcaecati fugiat iure! Ut illum velit ipsum a veritatis. Aperiam, ipsum molestiae. Maiores libero, ut praesentium delectus cumque ratione ab rerum! Perspiciatis ea in omnis cupiditate distinctio molestias! Neque, aspernatur vel? Quod eum, ipsa quam mollitia cupiditate quisquam. Culpa officiis dolorum nam eum deleniti dolor aut laboriosam est maxime corrupti. Aspernatur, nihil minus eaque odit ab voluptatibus necessitatibus nobis, error dolorem quas labore ipsam porro veniam.</p>
+	</div>
+
+{% endblock %}
+
+{% block content1 %}
+
+	<form method="post">
+		<label for="username">Username:</label>
+		<input type="text" name="username" id="username" placeholder="username" required>
+		<br>
+		<label for="password">Password:</label>
+		<input type="password" name="password" id="password" placeholder="password" required>
+		<br>
+		<label for="email">Email:</label>
+		<input type="email" name="email" id="email" placeholder="email" required>
+		<br>
+		<label for="nombre">Nombre:</label>
+		<input type="nombre" name="nombre" id="nombre" placeholder="nombre" required>
+		<br>
+		<label for="apellido">Apellido:</label>
+		<input type="apellido" name="apellido" id="apellido" placeholder="apellido" required>
+		<br>
+		<label for="telefono">Telefono:</label>
+		<input type="telefono" name="telefono" id="telefono" placeholder="telefono" required>
+		<br>
+		<label for="direccion">Direccion:</label>
+		<input type="direccion" name="direccion" id="direccion" placeholder="direccion" required>
+		<br>
+		<label for="ciudad">Ciudad:</label>
+		<input type="ciudad" name="ciudad" id="ciudad" placeholder="ciudad" required>
+		<br>
+		<label for="provincia">Provincia:</label>
+		<input type="provincia" name="provincia" id="provincia" placeholder="provincia" required>
+		<br>
+		<label for="pais">Pais:</label>
+		<input type="pais" name="pais" id="pais" placeholder="pais" required>
+		<br>
+		<label for="codigo_postal">Codigo Postal:</label>
+		<input type="codigo_postal" name="codigo_postal" id="codigo_postal" placeholder="codigo_postal" required>
+		<br>
+		<button type="submit">Login</button>
+	</form>
+{% endblock %}

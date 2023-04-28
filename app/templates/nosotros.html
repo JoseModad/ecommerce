@@ -1,0 +1,21 @@
+{% extends '/layout.html' %}
+
+{% block styles %}
+	{{ super() }}
+	<link rel="stylesheet" href="{{  url_for('static', path='nosotros.css') }}">
+{% endblock %}
+
+{% block content %}
+	<div class="ingreso">
+		<a href="#">Ingresar</a>
+		<a href="#">Registrarse</a>
+	</div>
+
+{% endblock %}
+
+{% block content1 %}
+	<div class="tit">
+		<h2>Sobre Nosotros</h2>
+		<p class="nosotros">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe possimus tenetur perspiciatis ea quis velit ullam sequi vitae fuga cum placeat cupiditate accusantium nobis hic veritatis, amet atque, dicta nisi?</p>
+	</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends '/layout.html' %}
+
+{% block styles %}
+	{{ super() }}
+	<link rel="stylesheet" href="{{  url_for('static', path='logueado.css') }}">
+{% endblock %}
+
+{% block content %}{% endblock %}
+
+{% block content1 %}
+	<div class="tit">
+		<h2>Usuario Logueado Exitosamente</h2>
+		<p class="parra">Usted ingreso Exitosamente, Bienvenido a nuestro portal</p>
+	</div>
+{% endblock %}
