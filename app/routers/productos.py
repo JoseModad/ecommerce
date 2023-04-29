@@ -2,7 +2,7 @@ from fastapi import Request, APIRouter, Form
 from typing import Annotated, List
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from app.db.modelos import Cliente, Login
+from app.db.modelos import Cliente, Login, Registro
 
 router = APIRouter(include_in_schema = False)
 
@@ -27,8 +27,16 @@ async def login(request: Request):
     await form.get_data()
     print(form.username)
     print(form.password)
-    return templates.TemplateResponse("logueado.html", {"request": request})   
-           
-@router.post("/crear-cliente")
-def  cliente(request: Request,  cliente: Cliente):
-    return templates.TemplateResponse("crear-cliente.html", {"request": request,  "cliente": cliente})
+    return templates.TemplateResponse("logueado.html", {"request": request})
+
+@router.get("/registrarse")
+def registrarse(request: Request):
+    return templates.TemplateResponse("registrarse.html", {"request": request}) 
+
+@router.post("/registro")
+async def registro(request: Request):
+    form = Registro(request)
+    await form.get_data()
+    print(form.username)
+    print(form.pais)
+    return templates.TemplateResponse("ingresar.html", {"request": request})
