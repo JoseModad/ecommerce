@@ -7,39 +7,58 @@
 	margin-bottom: 5vh;
 }
 
-.parra, h2 {
+.parra,h2 {
 	text-align: center;
 }
 
+.formulario-login {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 50vh;
+	margin-right: 2vh;
+}
+
 form {
-	width: 60vh;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
 	margin: auto;
-	padding: 20px;
-	border: 2px solid #ccc;
-	border-radius: 10px;
+	height: 50vh;
+	width: 85vh;
+	width: calc(85vh - 2vh);
+	text-align: left;
 }
 
-label {
-	display: block;
-	margin-bottom: 10px;
-	font-size: 2.5vh;
+.form-group {
+	display: flex;
+	align-items: center;
+	flex-basis: 50%;
+	max-width: 50%;
+	margin-bottom: 1rem;
 }
 
-input {
-	display: block;
-	margin-bottom: 20px;
-	width: 100%;
-	padding: 10px;
-	font-size: 2.5vh;
-	border-radius: 5px;
-	border: 2px solid #ccc;
+.form-group label {
+	flex-basis: 40%;
+	max-width: 40%;
+	padding-right: 1rem;
+	text-align: right;
+}
+
+.form-group input {
+	flex-basis: 50%;
+	max-width: 60%;
 }
 
 button {
-	background-color: rgb(55, 216, 55);
-	color: white;
-	padding: 10px 20px;
-	border: none;
-	border-radius: 5px;
-	font-size: 2.5vh;
+	flex-basis: 100%;
+	max-width: 90%;
+	margin-top: 1rem;
+	background-color: rgb(50, 216, 50);
+	margin-left: 6vh;
+	font-size: 2vh;
+	letter-spacing: 0.4vh;
+	font-weight: bold;
+	margin-bottom: 20vh;
 }

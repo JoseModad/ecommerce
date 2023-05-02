@@ -1,26 +1,34 @@
 {% extends '/layout.html' %}
 
 {% block styles %}
-	{{ super() }}
+{{ super() }}
 	<link rel="stylesheet" href="{{  url_for('static', path='ingresar.css') }}">
 {% endblock %}
 
 {% block content %}
 
-	<div class="tit">		
-		<p class="parra">Ingresa para poder comprar, obtener descuentos <br> y acceder a las ofertas exclusivas para clientes registrados</p>	
+	<div class="tit">
+		<p class="parra">Ingresa para poder comprar, obtener descuentos <br> y acceder a las ofertas exclusivas para
+			clientes registrados</p>
 	</div>
 
 {% endblock %}
 
 {% block content1 %}
 
-	<form method="POST" action="/login">
-		<label for="username">Username:</label>
-		<input type="text" name="username" id="username">			
-		<label for="password">Password:</label>
-		<input type="password" name="password" id="password">
-		<button type="submit">Ingresar</button>
-  	</form>
+	<div class="formulario-login">
+		<form method="POST" action="/login">
+			<div class="form-group">
+				<label for="username">Username:</label>
+				<input type="text" name="username" id="username">
+			</div>
+			<div class="form-group">
+				<label for="password">Password:</label>
+				<input type="password" name="password" id="password">
+			</div>
+			<button type="submit">Ingresar</button>
+		</form>
+	</div>
+
 
 {% endblock %}
