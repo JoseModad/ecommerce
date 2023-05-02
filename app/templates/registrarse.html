@@ -1,55 +1,78 @@
 {% extends '/layout.html' %}
 
 {% block styles %}
-	{{ super() }}
-	<link rel="stylesheet" href="{{  url_for('static', path='registrarse.css') }}">
+{{ super() }}
+<link rel="stylesheet" href="{{  url_for('static', path='registrarse.css') }}">
+<script src="{{  url_for('static', path='registrarse.js') }}"></script>
 {% endblock %}
 
 {% block content %}
 
-	<div class="tit">		
-		<p class="parra">Ingresa para poder comprar, obtener descuentos <br> y acceder a las ofertas exclusivas para clientes registrados</p>	
-	</div>
+<div class="tit">
+	<p class="parra">Ingresa para poder comprar, obtener descuentos <br> y acceder a las ofertas exclusivas para
+		clientes registrados</p>
+</div>
 
 {% endblock %}
 
 {% block content1 %}
 
-	<form method="POST" action="/registro">
-		<label for="username">Username:</label>
-		<input type="text" name="username" id="username">
-		<br>	
-		<label for="password">Password:</label>
-		<input type="password" name="password" id="password">
-		<br>
-		<br>	
-		<label for="email">Email:</label>
-		<input type="email" name="email" id="email">
-		<br>	
-		<label for="nombre">Nombre:</label>
-		<input type="nombre" name="nombre" id="nombre">
-		<br>	
-		<label for="apellido">Apellido:</label>
-		<input type="apellido" name="apellido" id="apellido">
-		<br>	
-		<label for="telefono">Telefono:</label>
-		<input type="telefono" name="telefono" id="telefono">
-		<br>	
-		<label for="direccion">Direccion:</label>
-		<input type="direccion" name="direccion" id="direccion">
-		<br>	
-		<label for="ciudad">Ciudad:</label>
-		<input type="ciudad" name="ciudad" id="ciudad">
-		<br>	
-		<label for="provincia">Provincia:</label>
-		<input type="provincia" name="provincia" id="provincia">
-		<br>	
-		<label for="pais">Pais:</label>
-		<input type="pais" name="pais" id="pais">
-		<br>	
-		<label for="codigo_postal">Codigo Postal:</label>
-		<input type="codigo_postal" name="codigo_postal" id="codigo_postal">
-		<button type="submit">Ingresar</button>
-  	</form>
+	<div class="formulario-registro">
+		<form method="POST" action="/registro">
+			<div class="form-group">
+				<label for="email">Email:</label>
+				<input type="email" name="email" id="email" required>
+			</div>
+			<div class="form-group">
+				<label for="username">Username:</label>
+				<input type="text" name="username" id="username" required>
+			</div>
+			<div class="form-group">
+				<label for="password">Password:</label>
+				<input type="password" name="password" id="password" required>
+			</div>
+			<div class="form-group">
+				<label for="repassword">Re-Password:</label>
+				<input type="password" name="repassword" id="repassword" required>
+			</div>
+			<div class="form-group">
+				<label for="nombre">Nombre:</label>
+				<input type="nombre" name="nombre" id="nombre" required>
+			</div>
+			<div class="form-group">
+				<label for="apellido">Apellido:</label>
+				<input type="apellido" name="apellido" id="apellido" required>
+			</div>
+			<div class="form-group">
+				<label for="direccion">Direccion:</label>
+				<input type="direccion" name="direccion" id="direccion" required>
+			</div>
+			<div class="form-group">
+				<label for="telefono">Telefono:</label>
+				<input type="telefono" name="telefono" id="telefono" required>
+			</div>
+			<div class="form-group">
+				<label for="ciudad">Ciudad:</label>
+				<input type="ciudad" name="ciudad" id="ciudad" required>
+			</div>
+			<div class="form-group">
+				<label for="provincia">Provincia:</label>
+				<input type="provincia" name="provincia" id="provincia" required>
+			</div>
+			<div class="form-group">
+				<label for="pais">Pais:</label>
+				<input type="pais" name="pais" id="pais">
+			</div>
+			<div class="form-group">
+				<label for="codigo_postal">Codigo Postal:</label>
+				<input type="codigo_postal" name="codigo_postal" id="codigo_postal" required>
+			</div>
+			<button type="submit">Ingresar</button>
+		</form>
+	</div>
+	
+{% endblock %}
 
+{% block scripts %}
+    <script type="text/javascript" src="../static/registrarse.js"></script>
 {% endblock %}
