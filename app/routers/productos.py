@@ -17,6 +17,10 @@ def  home(request: Request):
 def nosotros(request: Request):
     return templates.TemplateResponse("nosotros.html", {"request": request})
 
+@router.get("/proveedores")
+def proveedores(request: Request):
+    return templates.TemplateResponse("proveedores.html", {"request": request})
+
 @router.get("/ingresar")
 def cliente(request: Request):
     return templates.TemplateResponse("ingresar.html", {"request": request})

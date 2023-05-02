@@ -1,0 +1,21 @@
+{% extends '/layout.html' %}
+
+{% block styles %}
+	{{ super() }}
+	<link rel="stylesheet" href="{{  url_for('static', path='proveedores.css') }}">
+{% endblock %}
+
+{% block content %}
+	<div class="ingreso">
+		<a href="./ingresar">Ingresar</a>
+		<a href="./registrarse">Registrarse</a>
+	</div>
+
+{% endblock %}
+
+{% block content1 %}
+	<div class="tit">
+		<h2>Para comunicarse con nosotros puede usar los telefonos de Atencion al Cliente en el horario de 9 a 14 hs</h2>
+		<p class="parra">Tambien puede comunicarse al email con el asunto proveedores para una rapida Atencion</p>
+	</div>
+{% endblock %}

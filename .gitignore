@@ -160,3 +160,15 @@ cython_debug/
 #.idea/
 
 *.pyc
+
+ecommerce/Scripts/Activate.ps1
+ecommerce/Scripts/activate
+ecommerce/Scripts/activate.bat
+ecommerce/Scripts/deactivate.bat
+ecommerce/Scripts/pip.exe
+ecommerce/Scripts/pip3.10.exe
+ecommerce/Scripts/pip3.exe
+ecommerce/Scripts/python.exe
+ecommerce/Scripts/pythonw.exe
+ecommerce/Scripts/uvicorn.exe
+ecommerce/pyvenv.cfg
