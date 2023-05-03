@@ -1,11 +1,9 @@
 from fastapi import Request, APIRouter
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from app.db.modelos import Login, Registro
-from app.repository.manejo import verificar_usuario
+from app.db.modelos import Login
+from app.repository.manejo import verificar_usuario, registrar_usuario
 
-import csv
-import os
 
 router = APIRouter(include_in_schema = False)
 
@@ -34,8 +32,9 @@ async def login(request: Request):
     await form.get_data() 
     username = form.username
     password = form.password    
-    if await verificar_usuario(username, password):
-        return templates.TemplateResponse("logueado.html", {"request": request})
+    result, nombre = await verificar_usuario(username, password)
+    if result:
+        return templates.TemplateResponse("logueado.html", {"request": request, "nombre": nombre})
     else:
         return templates.TemplateResponse("ingresar.html", {"request": request})
     
@@ -46,15 +45,6 @@ def registrarse(request: Request):
 
 
 @router.post("/registro")
-async def registro(request: Request):
-    form = Registro(request)
-    await form.get_data()
-    file_exists = os.path.isfile('app/db/usuarios.csv')
-    with open('app/db/usuarios.csv', 'a', newline='',  encoding="utf-8") as f:
-        writer = csv.writer(f, delimiter=";")
-        if not file_exists: 
-            writer.writerow(['username', 'password', 'email', 'nombre', 'apellido', 'telefono', 'direccion', 'ciudad', 'provincia', 'pais', 'codigo_postal'])
-            writer.writerow([form.username, form.password, form.email, form.nombre, form.apellido, form.telefono, form.direccion, form.ciudad, form.provincia, form.pais, form.codigo_postal])
-            f.close()       
-          
+async def registro(request: Request):    
+    await registrar_usuario(request)
     return templates.TemplateResponse("ingresar.html", {"request": request})

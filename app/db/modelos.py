@@ -1,18 +1,4 @@
-from pydantic import BaseModel
 from fastapi import Request
-
-class Cliente(BaseModel):
-	id_cliente: int
-	nombre: str
-	apellido: str
-	email: str
-	password: str
-	telefono: str
-	direccion: str
-	ciudad: str
-	provincia: str
-	pais: str
-	codigo_postal: str
 
 class Login:
     def __init__(self, request: Request):
