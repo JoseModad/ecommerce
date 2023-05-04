@@ -6,13 +6,12 @@ from app.db.modelos import Registro, Login
 async def verificar_usuario(request):
     form = Login(request)
     await form.get_data()
-    username = form.username
-    password = form.password    
+    print(form)
     with open('app/db/usuarios.csv', 'r', encoding="utf-8") as f:
         reader = csv.reader(f, delimiter=";")
         headers = next(reader)        
         for row in reader:
-            if row[0] == username and row[1] == password:
+            if row[0] == form.username and row[1] == form.password:
                 nombre = row[3].title()                               
                 return True, nombre        
         return False, None
@@ -21,6 +20,7 @@ async def verificar_usuario(request):
 async def registrar_usuario(request):    
     form = Registro(request)
     await form.get_data()
+    print(form)
     file_exists = os.path.isfile('app/db/usuarios.csv')    
     with open('app/db/usuarios.csv', 'a+', newline='',  encoding="utf-8") as f:
         writer = csv.writer(f, delimiter=";")

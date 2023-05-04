@@ -10,6 +10,10 @@ class Login:
         form = await self.request.form()
         self.username = form.get("username")
         self.password = form.get("password")
+
+    # funcion para mostrar los datos en consola(borrar luego de la prueba)    
+    def __str__(self):
+        return f"username: {self.username}\npassword: {self.password}"
         
 class Registro:
     def __init__(self, request: Request):
@@ -38,4 +42,9 @@ class Registro:
         self.ciudad = form.get("ciudad")
         self.provincia = form.get("provincia")
         self.pais = form.get("pais")
-        self.codigo_postal = form.get("codigo_postal")       
+        self.codigo_postal = form.get("codigo_postal")
+
+    # funcion para mostrar los datos en consola(borrar luego de la prueba)
+    def __str__(self):
+        return f"username: {self.username}\npassword: {self.password}\nemail: {self.email}\nnombre: {self.nombre}\napellido: {self.apellido}\ntelefono: {self.telefono}\ndireccion: {self.direccion}\nciudad: {self.ciudad}\nprovincia: {self.provincia}\npais: {self.pais}\ncodigo_postal: {self.codigo_postal}"
+       
