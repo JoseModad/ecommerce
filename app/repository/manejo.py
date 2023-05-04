@@ -1,17 +1,21 @@
 import csv
 import os
-from app.db.modelos import Registro
+from app.db.modelos import Registro, Login
 
 
-async def verificar_usuario(username: str, password: str) -> bool:    
+async def verificar_usuario(request):
+    form = Login(request)
+    await form.get_data()
+    username = form.username
+    password = form.password    
     with open('app/db/usuarios.csv', 'r', encoding="utf-8") as f:
         reader = csv.reader(f, delimiter=";")
         headers = next(reader)        
         for row in reader:
             if row[0] == username and row[1] == password:
                 nombre = row[3].title()                               
-                return True, nombre
-        return False
+                return True, nombre        
+        return False, None
     
     
 async def registrar_usuario(request):    

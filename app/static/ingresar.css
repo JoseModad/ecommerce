@@ -62,3 +62,7 @@ button {
 	font-weight: bold;
 	margin-bottom: 20vh;
 }
+
+.mensaje {
+	color: red;
+}

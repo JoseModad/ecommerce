@@ -27,16 +27,12 @@ def cliente(request: Request):
     return templates.TemplateResponse("ingresar.html", {"request": request})
 
 @router.post("/login")
-async def login(request: Request):
-    form = Login(request)
-    await form.get_data() 
-    username = form.username
-    password = form.password    
-    result, nombre = await verificar_usuario(username, password)
+async def login(request: Request):    
+    result, nombre = await verificar_usuario(request)
     if result:
         return templates.TemplateResponse("logueado.html", {"request": request, "nombre": nombre})
-    else:
-        return templates.TemplateResponse("ingresar.html", {"request": request})
+    else:        
+        return templates.TemplateResponse("ingresar.html", {"request": request,  "mensaje": "Usuario o contraseña incorrectos"}) 
     
 
 @router.get("/registrarse")
