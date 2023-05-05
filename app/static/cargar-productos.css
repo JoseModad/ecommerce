@@ -1,17 +1,8 @@
-.tit {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	margin-top: 20vh;
-	margin-bottom: 5vh;
+body {
+	background-color: aquamarine;
 }
 
-.parra,h2 {
-	text-align: center;
-}
-
-.formulario-registro {
+.formulario-cargaProducto {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -29,6 +20,8 @@ form {
 	width: 85vh;
 	width: calc(85vh - 2vh);
 	text-align: left;
+	font-size: 2vh;
+	margin-top: 6vh;
 }
 
 .form-group {
@@ -49,6 +42,15 @@ form {
 .form-group input {
 	flex-basis: 50%;
 	max-width: 60%;
+	font-size: 3.5vh;
+}
+
+.form-group input[type="file"] {
+	font-size: 1.9vh;  
+}
+
+textarea {
+	width: 70%;
 }
 
 button {
@@ -61,3 +63,12 @@ button {
 	letter-spacing: 0.4vh;
 	font-weight: bold;
 }
+
+.form-group input[type="file"] {
+	min-width: 100%;
+	max-width: 100%;
+}
+  
+.form-group label[for="imagen"] {
+	text-align: center;
+} 

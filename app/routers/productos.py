@@ -1,10 +1,8 @@
-from fastapi import Request, APIRouter
+from fastapi import Request, APIRouter, File,  UploadFile
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from app.db.modelos import Login
-from app.repository.manejo import verificar_usuario, registrar_usuario
-
-
+from app.db.modelos import Login, Producto
+from app.repository.manejo import verificar_usuario, registrar_usuario, guardar_imagen
 router = APIRouter(include_in_schema = False)
 
 templates = Jinja2Templates(directory="app/templates")
@@ -44,3 +42,19 @@ def registrarse(request: Request):
 async def registro(request: Request):    
     await registrar_usuario(request)
     return templates.TemplateResponse("ingresar.html", {"request": request})
+
+
+@router.get("/cargar-productos")
+def cargar_productos(request: Request):
+    return templates.TemplateResponse("cargar-productos.html", {"request": request})
+
+
+@router.post("/cargado")
+async def cargado(request: Request, file: UploadFile = File(...)):
+    producto = Producto(request)
+    await producto.get_data()
+    if file:
+        await guardar_imagen(file)
+    else:
+        print("No se ha enviado ninguna imagen")
+    return templates.TemplateResponse("cargar-productos.html", {"request": request})

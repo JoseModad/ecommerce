@@ -1,6 +1,6 @@
 import csv
 import os
-from app.db.modelos import Registro, Login
+from app.db.modelos import Registro, Login, Producto
 
 
 async def verificar_usuario(request):
@@ -30,4 +30,15 @@ async def registrar_usuario(request):
             f.close()
         else:
             writer.writerow([form.username, form.password, form.email, form.nombre, form.apellido, form.telefono, form.direccion, form.ciudad, form.provincia, form.pais, form.codigo_postal])
-            f.close()          
+            f.close() 
+            
+
+async def guardar_imagen(upload_file):
+    file_location = f"app/db/imagenes/{upload_file.filename}"
+    with open(file_location, "wb") as buffer:
+        while True:
+            data = await upload_file.read(1024)
+            if not data:
+                break
+            buffer.write(data)
+             
