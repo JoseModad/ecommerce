@@ -173,7 +173,5 @@ ecommerce/Scripts/pythonw.exe
 ecommerce/Scripts/uvicorn.exe
 ecommerce/pyvenv.cfg
 
-IMG*
-
 ecommerce/*
 *.jpg

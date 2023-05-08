@@ -1,8 +1,7 @@
 from fastapi import Request, APIRouter, File,  UploadFile
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from app.db.modelos import Login, Producto
-from app.repository.manejo import verificar_usuario, registrar_usuario, guardar_imagen,  guardar_producto
+from app.repository.manejo import verificar_usuario, registrar_usuario, guardar_producto
 
 
 router = APIRouter(include_in_schema = False)
@@ -53,11 +52,6 @@ def cargar_productos(request: Request):
 
 @router.post("/cargado")
 async def cargado(request: Request, file: UploadFile = File(...)):
-    producto = Producto(request)
-    await producto.get_data()
-    if file:
-        await guardar_imagen(producto.nombre_imagen, file)
-        await guardar_producto(producto)
-    else:
-        print("No se ha enviado ninguna imagen")
-    return templates.TemplateResponse("cargar-productos.html", {"request": request})
+    await guardar_producto(request)
+    return templates.TemplateResponse("cargar-productos.html", {"request": request})    
+

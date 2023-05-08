@@ -56,13 +56,14 @@ class Registro:
 class Producto:
     def __init__(self, request: Request):
         self.request: Request = request
-        self.producto: str = None
+        self.nombre_producto: str = None
         self.precio: str = None
         self.marca: str = None
         self.descripcion: str = None
         self.categoria: str = None
         self.stock: str = None
         self.imagen: UploadFile = None
+        self.nombre_imagen: str = None
         
     async def get_data(self):
         form = await self.request.form()
