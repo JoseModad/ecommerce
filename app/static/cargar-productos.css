@@ -1,74 +1,120 @@
-body {
-	background-color: aquamarine;
+/* body {
+	background-color: bisque;
 }
 
-.formulario-cargaProducto {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 50vh;
-	margin-right: 2vh;
+h2 {
+	text-align: center;
 }
 
-form {
+.cargaProducto {
+	background-color: aliceblue;
+	min-width: 90vh;
+	min-height: 80vh;
+	margin: 2vh;
 	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
 	justify-content: center;
-	margin: auto;
-	height: 50vh;
-	width: 85vh;
-	width: calc(85vh - 2vh);
-	text-align: left;
-	font-size: 2vh;
-	margin-top: 6vh;
 }
 
 .form-group {
-	display: flex;
-	align-items: center;
-	flex-basis: 50%;
-	max-width: 50%;
-	margin-bottom: 1rem;
+	width: 100%;
+	margin: 4vh;
 }
 
-.form-group label {
-	flex-basis: 40%;
-	max-width: 40%;
-	padding-right: 1rem;
-	text-align: right;
-}
-
-.form-group input {
-	flex-basis: 50%;
-	max-width: 60%;
-	font-size: 3.5vh;
-}
-
-.form-group input[type="file"] {
-	font-size: 1.9vh;  
-}
-
-textarea {
-	width: 70%;
-}
-
-button {
-	flex-basis: 100%;
-	max-width: 90%;
-	margin-top: 1rem;
-	background-color: rgb(50, 216, 50);
-	margin-left: 6vh;
-	font-size: 2vh;
-	letter-spacing: 0.4vh;
-	font-weight: bold;
-}
-
-.form-group input[type="file"] {
-	min-width: 100%;
-	max-width: 100%;
-}
-  
-.form-group label[for="imagen"] {
-	text-align: center;
+.form-item {
+	display: inline-block;
+	margin-right: 2vh;
 } 
+
+.container-botones {
+	display: flex;
+	justify-content: center;
+}
+
+.botones {
+	min-width: 50vh;
+	margin: 4vh;
+	display: flex;
+	justify-content: space-between;
+}
+
+.boton {
+	background-color: rgb(50, 216, 50);
+	color: white;
+	font-size: 2vh;
+	margin: auto;
+} */
+
+
+
+  h2 {
+	text-align: center;
+  }
+
+  .cargaProducto {
+	background-color: rgb(203, 199, 199);
+	min-width: 90vh;
+	min-height: 45vh;
+	margin: 2vh;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	font-size: 3vh;
+  }
+
+  .form-group {
+	width: 100%;
+	margin: 4vh;
+	display: flex;
+	flex-wrap: wrap;
+  }
+
+  .form-item {
+	display: inline-block;
+	margin-left: 1vh;
+	margin-right: 1vh;
+	flex: 1 1 30%;
+  }
+
+  .container-envio {
+	display: flex;
+	justify-content: center;
+  }
+
+  .container-botones {
+	display: flex;
+	justify-content: center;
+  }
+  
+  input {
+	font-size: 2vh;
+  }
+
+  .botones {
+	min-width: 90vh;
+	margin: 4vh;
+	display: flex;
+	justify-content: space-between;
+  }
+
+  .boton {
+	background-color: rgb(50, 216, 50);
+	color: white;
+	font-size: 2vh;
+	margin: auto;
+	width: 100%;
+  }
+
+  /* Media Queries para hacerlo responsive */
+  @media (max-width: 768px) {
+	.cargaProducto {
+	  min-height: auto;
+	}
+
+	.form-group {
+	  flex-direction: column;
+	}
+
+	.form-item {
+	  flex: 1 1 100%;
+	}
+  }

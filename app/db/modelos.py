@@ -61,17 +61,20 @@ class Producto:
         self.marca: str = None
         self.descripcion: str = None
         self.categoria: str = None
+        self.stock: str = None
         self.imagen: UploadFile = None
         
     async def get_data(self):
         form = await self.request.form()
-        self.producto = form.get("producto")
+        self.nombre_producto = form.get("producto")
         self.precio = form.get("precio")
         self.marca = form.get("marca")
         self.descripcion = form.get("descripcion")
         self.categoria = form.get("categoria")
+        self.stock = form.get("stock")
         self.imagen = form.get("file")
+        self.nombre_imagen = self.nombre_producto + ".jpg"
        
     # funcion para mostrar los datos en consola(borrar luego de la prueba)
     def __str__(self):
-        return f"producto: {self.producto}\nprecio: {self.precio}\ndescripcion: {self.descripcion}\ncategoria: {self.categoria}\nmarca: {self.marca}\nimagen: {self.imagen}"
+        return f"producto: {self.nombre_producto}\nprecio: {self.precio}\ndescripcion: {self.descripcion}\ncategoria: {self.categoria}\nmarca: {self.marca}\nstock: {self.stock}\nimagen: {self.imagen}"

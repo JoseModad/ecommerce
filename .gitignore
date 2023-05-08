@@ -176,3 +176,4 @@ ecommerce/pyvenv.cfg
 IMG*
 
 ecommerce/*
+*.jpg
