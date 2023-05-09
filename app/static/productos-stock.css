@@ -1,0 +1,39 @@
+h1 {
+	text-align: center;
+	font-size: 3vh;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+li {
+	display: flex;
+	align-items: center;
+	justify-content:center;
+	margin-bottom: 1vh;
+	font-size: 2.5vh;
+	font-weight: bold;
+}
+
+.producto {
+	flex: 1;
+}
+
+.stock {
+	width: 100px;
+	text-align: center;
+}
+
+span {
+	margin: 1vh;
+}
+
+.fila-par {
+	background-color: #cac7c7;
+}
+
+.fila-impar {
+	background-color: #e6e6e6;
+}

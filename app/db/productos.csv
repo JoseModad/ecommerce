@@ -1,2 +1,4 @@
 producto;marca;categoria;stock;precio;descripcion;nombre_imagen
 pulverizador;generico;envases;50;120;pulverizador con gatillo;pulverizador.jpg
+pulverizador3;generico;envases;25;100;pulverizador con gatillo de bolsillo;pulverizador3.jpg
+pulverizador2;generico;envases;60;150;pulverizador con gatillo regulable;pulverizador2.jpg

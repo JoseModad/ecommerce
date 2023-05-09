@@ -1,7 +1,7 @@
-from fastapi import Request, APIRouter, File,  UploadFile
+from fastapi import Request, APIRouter, File,  UploadFile, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from app.repository.manejo import verificar_usuario, registrar_usuario, guardar_producto
+from app.repository.manejo import verificar_usuario, registrar_usuario, guardar_producto, consultastockproducto
 
 
 router = APIRouter(include_in_schema = False)
@@ -53,5 +53,19 @@ def cargar_productos(request: Request):
 @router.post("/cargado")
 async def cargado(request: Request, file: UploadFile = File(...)):
     await guardar_producto(request)
-    return templates.TemplateResponse("cargar-productos.html", {"request": request})    
+    return templates.TemplateResponse("cargar-productos.html", {"request": request})
+
+
+@router.post("/consultas")
+async def consultas(request: Request, id: str = Form(...)):
+    if id == "botonProductos":
+        consulta = await consultastockproducto(request, id)
+        return templates.TemplateResponse("productos-stock.html", {"request": request, "consulta": consulta})                                        
+    elif id == "botonVentas":
+        consulta = "Consulta para ventas"
+    elif id == "botonEntregas":
+        consulta = "Consulta para entregas"
+    elif id == "botonPagos":
+        consulta = "Consulta para pagos" 
+    
 

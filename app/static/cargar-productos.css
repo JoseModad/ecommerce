@@ -1,56 +1,8 @@
-/* body {
-	background-color: bisque;
-}
-
 h2 {
 	text-align: center;
 }
 
 .cargaProducto {
-	background-color: aliceblue;
-	min-width: 90vh;
-	min-height: 80vh;
-	margin: 2vh;
-	display: flex;
-	justify-content: center;
-}
-
-.form-group {
-	width: 100%;
-	margin: 4vh;
-}
-
-.form-item {
-	display: inline-block;
-	margin-right: 2vh;
-} 
-
-.container-botones {
-	display: flex;
-	justify-content: center;
-}
-
-.botones {
-	min-width: 50vh;
-	margin: 4vh;
-	display: flex;
-	justify-content: space-between;
-}
-
-.boton {
-	background-color: rgb(50, 216, 50);
-	color: white;
-	font-size: 2vh;
-	margin: auto;
-} */
-
-
-
-  h2 {
-	text-align: center;
-  }
-
-  .cargaProducto {
 	background-color: rgb(203, 199, 199);
 	min-width: 90vh;
 	min-height: 45vh;
@@ -59,53 +11,55 @@ h2 {
 	justify-content: center;
 	flex-wrap: wrap;
 	font-size: 3vh;
-  }
+}
 
-  .form-group {
+.form-group {
 	width: 100%;
 	margin: 4vh;
 	display: flex;
-	flex-wrap: wrap;
-  }
+	justify-content: center;
+}
 
-  .form-item {
+.form-item {
 	display: inline-block;
 	margin-left: 1vh;
 	margin-right: 1vh;
 	flex: 1 1 30%;
-  }
+}
 
-  .container-envio {
+.container-envio {
 	display: flex;
 	justify-content: center;
-  }
-
-  .container-botones {
-	display: flex;
-	justify-content: center;
-  }
+}
   
-  input {
+input {
 	font-size: 2vh;
-  }
+}
 
-  .botones {
-	min-width: 90vh;
-	margin: 4vh;
+.container-botones {
+	text-align: center;
+	width: 100%;
 	display: flex;
-	justify-content: space-between;
-  }
+	justify-content: center;
+}
 
-  .boton {
+.botones {
+	width: 15vh;
+	display: inline-block;
+	margin: 2vh;
+}  
+
+.boton {
 	background-color: rgb(50, 216, 50);
 	color: white;
 	font-size: 2vh;
 	margin: auto;
 	width: 100%;
-  }
+}
+
 
   /* Media Queries para hacerlo responsive */
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
 	.cargaProducto {
 	  min-height: auto;
 	}
@@ -117,4 +71,4 @@ h2 {
 	.form-item {
 	  flex: 1 1 100%;
 	}
-  }
+}

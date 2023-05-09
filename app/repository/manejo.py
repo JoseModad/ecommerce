@@ -6,7 +6,6 @@ from app.db.modelos import Registro, Login, Producto
 async def verificar_usuario(request):
     form = Login(request)
     await form.get_data()
-    print(form)
     with open('app/db/usuarios.csv', 'r', encoding="utf-8") as f:
         reader = csv.reader(f, delimiter=";")
         headers = next(reader)        
@@ -20,7 +19,6 @@ async def verificar_usuario(request):
 async def registrar_usuario(request):    
     form = Registro(request)
     await form.get_data()
-    print(form)
     file_exists = os.path.isfile('app/db/usuarios.csv')    
     with open('app/db/usuarios.csv', 'a+', newline='',  encoding="utf-8") as f:
         writer = csv.writer(f, delimiter=";")
@@ -51,4 +49,15 @@ async def guardar_producto(request):
         else:
             writer.writerow([producto.nombre_producto, producto.marca, producto.categoria, producto.stock, producto.precio, producto.descripcion, producto.nombre_imagen])
     f.close()
-             
+    
+
+async def consultastockproducto(request, id):
+    consulta = []
+    with open("app/db/productos.csv", "r", encoding="utf-8") as f:
+            archivo = csv.reader(f, delimiter=";")
+            next(archivo)
+            for linea in archivo:
+                producto = linea[0]
+                stock = linea[3]
+                consulta.append({"producto": producto, "stock": stock})
+    return consulta    
