@@ -1,21 +1,6 @@
 from fastapi import Request, UploadFile
 
 
-class Login:    
-    def __init__(self, request: Request):
-        self.request : Request = request
-        self.username : str = None
-        self.password : str = None
-        
-    async def get_data(self):
-        form = await self.request.form()
-        self.username = form.get("username")
-        self.password = form.get("password")
-
-    # funcion para mostrar los datos en consola(borrar luego de la prueba)    
-    def __str__(self):
-        return f"username: {self.username}\npassword: {self.password}"
-        
 class RegistroForm:
     def __init__(self, request: Request):
         self.request : Request = request

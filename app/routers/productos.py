@@ -1,7 +1,7 @@
 from fastapi import Request, APIRouter, File,  UploadFile, Form, Depends
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from app.repository.manejo import verificar_usuario, guardar_producto, consultastockproducto
+from app.repository.manejo import guardar_producto, consultastockproducto
 from app.db.database import get_db
 from sqlalchemy.orm import Session
 from app.db import modelos
@@ -36,10 +36,13 @@ def cliente(request: Request):
     return templates.TemplateResponse("ingresar.html", {"request": request})
 
 @router.post("/login")
-async def login(request: Request):    
-    result, nombre = await verificar_usuario(request)
+async def login(request: Request, db: Session = Depends(get_db)):    
+    form = RegistroForm(request)
+    await form.get_data()
+    usuario = modelos.User(username = form.username, password = form.password)
+    result = db.query(modelos.User).filter(modelos.User.username == usuario.username, modelos.User.password == usuario.password).first()    
     if result:
-        return templates.TemplateResponse("logueado.html", {"request": request, "nombre": nombre})
+        return templates.TemplateResponse("logueado.html", {"request": request, "nombre": result.nombre})
     else:        
         return templates.TemplateResponse("ingresar.html", {"request": request,  "mensaje": "Usuario o contraseña incorrectos"}) 
     

@@ -1,21 +1,8 @@
 import csv
 import os
-from app.schemas import Login, Producto
+from app.schemas import Producto
 
 
-async def verificar_usuario(request):
-    form = Login(request)
-    await form.get_data()
-    with open('app/db/usuarios.csv', 'r', encoding="utf-8") as f:
-        reader = csv.reader(f, delimiter=";")
-        headers = next(reader)        
-        for row in reader:
-            if row[0] == form.username and row[1] == form.password:
-                nombre = row[3].title()                               
-                return True, nombre        
-        return False, None
-    
-    
 async def guardar_producto(request):
     producto = Producto(request)
     await producto.get_data()
