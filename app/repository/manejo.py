@@ -1,6 +1,6 @@
 import csv
 import os
-from app.db.modelos import Registro, Login, Producto
+from app.schemas import Login, Producto
 
 
 async def verificar_usuario(request):
@@ -16,20 +16,6 @@ async def verificar_usuario(request):
         return False, None
     
     
-async def registrar_usuario(request):    
-    form = Registro(request)
-    await form.get_data()
-    file_exists = os.path.isfile('app/db/usuarios.csv')    
-    with open('app/db/usuarios.csv', 'a+', newline='',  encoding="utf-8") as f:
-        writer = csv.writer(f, delimiter=";")
-        if not file_exists:             
-            writer.writerow(['username', 'password', 'email', 'nombre', 'apellido', 'telefono', 'direccion', 'ciudad', 'provincia', 'pais', 'codigo_postal'])            
-            writer.writerow([form.username, form.password, form.email, form.nombre, form.apellido, form.telefono, form.direccion, form.ciudad, form.provincia, form.pais, form.codigo_postal])            
-        else:
-            writer.writerow([form.username, form.password, form.email, form.nombre, form.apellido, form.telefono, form.direccion, form.ciudad, form.provincia, form.pais, form.codigo_postal])
-    f.close() 
-            
-
 async def guardar_producto(request):
     producto = Producto(request)
     await producto.get_data()

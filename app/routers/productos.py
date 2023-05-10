@@ -1,12 +1,22 @@
-from fastapi import Request, APIRouter, File,  UploadFile, Form
+from fastapi import Request, APIRouter, File,  UploadFile, Form, Depends
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from app.repository.manejo import verificar_usuario, registrar_usuario, guardar_producto, consultastockproducto
+from app.repository.manejo import verificar_usuario, guardar_producto, consultastockproducto
+from app.db.database import get_db
+from sqlalchemy.orm import Session
+from app.db import modelos
+from app.schemas import RegistroForm
 
 
 router = APIRouter(include_in_schema = False)
 
 templates = Jinja2Templates(directory="app/templates")
+
+@router.get("/usuarios")
+def ruta(db: Session = Depends(get_db)):
+    usuarios = db.query(modelos.User).all()
+    print(usuarios)
+    return usuarios
 
 
 @router.get("/", response_class=HTMLResponse)
@@ -40,8 +50,25 @@ def registrarse(request: Request):
 
 
 @router.post("/registro")
-async def registro(request: Request):    
-    await registrar_usuario(request)
+async def registro(request: Request, db: Session = Depends(get_db)):
+    form = RegistroForm(request)
+    await form.get_data()    
+    nuevo_usuario = modelos.User(
+        username = form.username,
+        password = form.password,
+        email = form.email,
+        nombre = form.nombre,
+        apellido = form.apellido,
+        telefono = form.telefono,
+        direccion = form.direccion,
+        ciudad = form.ciudad,
+        provincia = form.provincia,
+        pais = form.pais,
+        codigo_postal = form.codigo_postal
+    )        
+    db.add(nuevo_usuario)
+    db.commit()    
+    db.refresh(nuevo_usuario)
     return templates.TemplateResponse("ingresar.html", {"request": request})
 
 
