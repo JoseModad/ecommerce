@@ -4,7 +4,7 @@ from fastapi.templating import Jinja2Templates
 from app.repository.manejo import guardar_producto, consultastockproducto, registro_usuario, logueo_usuario
 from app.db.database import get_db
 from sqlalchemy.orm import Session
-from app.db import modelos
+# from app.db import modelos
 
 router = APIRouter(include_in_schema = False)
 
@@ -52,7 +52,7 @@ async def login(request: Request, db: Session = Depends(get_db)):
 
 @router.get("/registrarse")
 def registrarse(request: Request):
-    return templates.TemplateResponse("registrarse.html", {"request": request, "mensaje": None})
+    return templates.TemplateResponse("registrarse.html", {"request": request, "mensaje": ""})
     
 
 @router.post("/registro")

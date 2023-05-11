@@ -8,7 +8,7 @@ class User(Base):
     __tablename__ = "usuarios"
     id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String(20), unique=True, nullable=False)
-    password = Column(String(20), nullable=False)
+    password = Column(String(120), nullable=False)
     email = Column(String(120), unique=True, nullable=False)
     nombre = Column(String(20), nullable=False)
     apellido  = Column(String(20), nullable=False)

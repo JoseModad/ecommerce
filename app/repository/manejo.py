@@ -2,6 +2,7 @@ import csv
 import os
 from app.db import modelos
 from app.schemas import RegistroForm, ProductoForm
+from app.hasing import Hash
 
 
 async def guardar_producto(request, db):
@@ -37,8 +38,7 @@ async def guardar_producto(request, db):
    
 
 async def consultastockproducto(db):
-    consulta = db.query(modelos.Producto.nombre_producto, modelos.Producto.stock).all()
-    
+    consulta = db.query(modelos.Producto.nombre_producto, modelos.Producto.stock).all()    
     return consulta
 
 
@@ -55,7 +55,7 @@ async def registro_usuario(request, db):
     else:         
         nuevo_usuario = modelos.User(
             username = form.username,
-            password = form.password,
+            password = Hash.hash_password(form.password),
             email = form.email,
             nombre = form.nombre,
             apellido = form.apellido,
@@ -75,10 +75,9 @@ async def registro_usuario(request, db):
 
 async def logueo_usuario(request, db):
     form = RegistroForm(request)
-    await form.get_data()
-    usuario = modelos.User(username = form.username, password = form.password)
-    result = db.query(modelos.User).filter(modelos.User.username == usuario.username, modelos.User.password == usuario.password).first()    
-    if result:
+    await form.get_data()    
+    result = db.query(modelos.User).filter(modelos.User.username == form.username).first()
+    if result and Hash.verify_password(form.password, result.password):
         nombre = result.nombre
         mensaje = ("logueado.html", nombre)
         return mensaje
@@ -86,3 +85,4 @@ async def logueo_usuario(request, db):
         mje = "Usuario o contraseña incorrectos"     
         mensaje =("ingresar.html", mje)
         return mensaje
+    
