@@ -35,7 +35,7 @@ class RegistroForm:
         return f"username: {self.username}\npassword: {self.password}\nemail: {self.email}\nnombre: {self.nombre}\napellido: {self.apellido}\ntelefono: {self.telefono}\ndireccion: {self.direccion}\nciudad: {self.ciudad}\nprovincia: {self.provincia}\npais: {self.pais}\ncodigo_postal: {self.codigo_postal}"
 
 
-class Producto:
+class ProductoForm:
     def __init__(self, request: Request):
         self.request: Request = request
         self.nombre_producto: str = None

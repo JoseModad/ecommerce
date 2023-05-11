@@ -11,7 +11,7 @@ ul {
 li {
 	display: flex;
 	align-items: center;
-	justify-content:center;
+	justify-content: center;
 	margin-bottom: 1vh;
 	font-size: 2.5vh;
 	font-weight: bold;
@@ -19,11 +19,13 @@ li {
 
 .producto {
 	flex: 1;
+	margin-left: 3vh;
 }
 
 .stock {
-	width: 100px;
-	text-align: center;
+	width: 100%;
+	text-align: right;
+	margin-right: 3vh;
 }
 
 span {

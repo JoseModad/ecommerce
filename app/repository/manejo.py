@@ -1,40 +1,44 @@
 import csv
 import os
-from app.schemas import Producto
 from app.db import modelos
-from app.schemas import RegistroForm
+from app.schemas import RegistroForm, ProductoForm
 
 
-async def guardar_producto(request):
-    producto = Producto(request)
+async def guardar_producto(request, db):
+    producto = ProductoForm(request)
     await producto.get_data()
-    file_location = f"app/static/img/{producto.nombre_imagen}"
-    with open(file_location, "wb") as buffer:
-        while True:
-            data = await producto.imagen.read(1024)
-            if not data:
-                break
-            buffer.write(data)        
-    file_exists = os.path.isfile('app/db/productos.csv')
-    with open('app/db/productos.csv', 'a+', newline='',  encoding="utf-8") as f:
-        writer = csv.writer(f, delimiter=";")
-        if not file_exists:             
-            writer.writerow(['producto', 'marca', 'categoria', 'stock', 'precio', 'descripcion', 'nombre_imagen'])
-            writer.writerow([producto.nombre_producto, producto.marca, producto.categoria, producto.stock, producto.precio, producto.descripcion, producto.nombre_imagen])
-        else:
-            writer.writerow([producto.nombre_producto, producto.marca, producto.categoria, producto.stock, producto.precio, producto.descripcion, producto.nombre_imagen])
-    f.close()
-    
+    exists_product = db.query(modelos.Producto).filter(modelos.Producto.nombre_producto == producto.nombre_producto).first()
+    if exists_product:
+        mensaje = "El producto ya existe"
+        return mensaje
+    else:
+        file_location = f"app/static/img/{producto.nombre_imagen}"
+        with open(file_location, "wb") as buffer:
+            while True:
+                data = await producto.imagen.read(1024)
+                if not data:
+                    break
+                buffer.write(data)
+                
+        nuevo_producto = modelos.Producto(
+            nombre_producto = producto.nombre_producto,
+            marca = producto.marca,
+            categoria = producto.categoria,
+            stock = producto.stock,
+            precio = producto.precio,
+            descripcion = producto.descripcion,
+            nombre_imagen = producto.nombre_imagen
+        )
+        db.add(nuevo_producto)
+        db.commit()    
+        db.refresh(nuevo_producto)
+        mensaje= "Producto agregado"
+        return mensaje
+   
 
-async def consultastockproducto(request, id):
-    consulta = []
-    with open("app/db/productos.csv", "r", encoding="utf-8") as f:
-            archivo = csv.reader(f, delimiter=";")
-            next(archivo)
-            for linea in archivo:
-                producto = linea[0]
-                stock = linea[3]
-                consulta.append({"producto": producto, "stock": stock})
+async def consultastockproducto(db):
+    consulta = db.query(modelos.Producto.nombre_producto, modelos.Producto.stock).all()
+    
     return consulta
 
 

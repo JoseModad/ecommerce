@@ -4,7 +4,7 @@ from fastapi.templating import Jinja2Templates
 from app.repository.manejo import guardar_producto, consultastockproducto, registro_usuario, logueo_usuario
 from app.db.database import get_db
 from sqlalchemy.orm import Session
-
+from app.db import modelos
 
 router = APIRouter(include_in_schema = False)
 
@@ -16,8 +16,10 @@ templates = Jinja2Templates(directory="app/templates")
 # @router.get("/usuarios")
 # def ruta(db: Session = Depends(get_db)):
 #     usuarios = db.query(modelos.User).all()
+#     productos = db.query(modelos.Producto).all()
 #     print(usuarios)
-#     return usuarios
+#     print(productos)
+#     return usuarios, productos   
 
 
 # Funciones para el panel de Usuario
@@ -64,19 +66,19 @@ async def registro(request: Request, db: Session = Depends(get_db)):
 
 @router.get("/cargar-productos")
 def cargar_productos(request: Request):
-    return templates.TemplateResponse("cargar-productos.html", {"request": request})
+    return templates.TemplateResponse("cargar-productos.html", {"request": request, "mensaje": ""})
 
 
 @router.post("/cargado")
-async def cargado(request: Request, file: UploadFile = File(...)):
-    await guardar_producto(request)
-    return templates.TemplateResponse("cargar-productos.html", {"request": request})
+async def cargado(request: Request, file: UploadFile = File(...), db: Session = Depends(get_db)):
+    mensaje = await guardar_producto(request, db)
+    return templates.TemplateResponse("cargar-productos.html", {"request": request, "mensaje": mensaje})
 
 
 @router.post("/consultas")
-async def consultas(request: Request, id: str = Form(...)):
+async def consultas(request: Request, id: str = Form(...), db: Session = Depends(get_db)):
     if id == "botonProductos":
-        consulta = await consultastockproducto(request, id)
+        consulta = await consultastockproducto(db)
         return templates.TemplateResponse("productos-stock.html", {"request": request, "consulta": consulta})                                        
     elif id == "botonVentas":
         consulta = "Consulta para ventas"
