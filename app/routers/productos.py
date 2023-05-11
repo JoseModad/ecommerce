@@ -1,12 +1,9 @@
 from fastapi import Request, APIRouter, File,  UploadFile, Form, Depends
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from app.repository.manejo import guardar_producto, consultastockproducto
+from app.repository.manejo import guardar_producto, consultastockproducto, registro_usuario, logueo_usuario
 from app.db.database import get_db
 from sqlalchemy.orm import Session
-from app.db import modelos
-from app.schemas import RegistroForm
-
 
 
 router = APIRouter(include_in_schema = False)
@@ -47,14 +44,8 @@ def cliente(request: Request):
 
 @router.post("/login")
 async def login(request: Request, db: Session = Depends(get_db)):    
-    form = RegistroForm(request)
-    await form.get_data()
-    usuario = modelos.User(username = form.username, password = form.password)
-    result = db.query(modelos.User).filter(modelos.User.username == usuario.username, modelos.User.password == usuario.password).first()    
-    if result:
-        return templates.TemplateResponse("logueado.html", {"request": request, "nombre": result.nombre})
-    else:        
-        return templates.TemplateResponse("ingresar.html", {"request": request,  "mensaje": "Usuario o contraseña incorrectos"}) 
+     mensaje = await logueo_usuario(request, db)
+     return templates.TemplateResponse(mensaje[0], {"request": request, "mensaje": mensaje[1]})
     
 
 @router.get("/registrarse")
@@ -64,32 +55,8 @@ def registrarse(request: Request):
 
 @router.post("/registro")
 async def registro(request: Request, db: Session = Depends(get_db)):
-    form = RegistroForm(request)
-    await form.get_data()
-    exists_username = db.query(modelos.User).filter(modelos.User.username == form.username).first()
-    exists_email = db.query(modelos.User).filter(modelos.User.email == form.email).first()
-    if exists_username or exists_email:
-        mensaje = "El usuario o email ya existen"
-        return templates.TemplateResponse("registrarse.html", {"request": request, "mensaje": mensaje})
-
-    else:         
-        nuevo_usuario = modelos.User(
-            username = form.username,
-            password = form.password,
-            email = form.email,
-            nombre = form.nombre,
-            apellido = form.apellido,
-            telefono = form.telefono,
-            direccion = form.direccion,
-            ciudad = form.ciudad,
-            provincia = form.provincia,
-            pais = form.pais,
-            codigo_postal = form.codigo_postal
-        )
-        db.add(nuevo_usuario)
-        db.commit()    
-        db.refresh(nuevo_usuario)
-        return templates.TemplateResponse("ingresar.html", {"request": request})
+    retorno = await registro_usuario(request, db)
+    return templates.TemplateResponse(retorno[0], {"request": request, "mensaje": retorno[1]})
 
 
 

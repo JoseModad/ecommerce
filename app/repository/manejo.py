@@ -1,6 +1,8 @@
 import csv
 import os
 from app.schemas import Producto
+from app.db import modelos
+from app.schemas import RegistroForm
 
 
 async def guardar_producto(request):
@@ -33,4 +35,50 @@ async def consultastockproducto(request, id):
                 producto = linea[0]
                 stock = linea[3]
                 consulta.append({"producto": producto, "stock": stock})
-    return consulta    
+    return consulta
+
+
+async def registro_usuario(request, db):
+    form = RegistroForm(request)
+    await form.get_data()
+    exists_username = db.query(modelos.User).filter(modelos.User.username == form.username).first()
+    exists_email = db.query(modelos.User).filter(modelos.User.email == form.email).first()
+    if exists_username or exists_email:
+        mensaje = "El usuario o email ya existen"
+        retorno = ("registrarse.html", mensaje)
+        return retorno
+
+    else:         
+        nuevo_usuario = modelos.User(
+            username = form.username,
+            password = form.password,
+            email = form.email,
+            nombre = form.nombre,
+            apellido = form.apellido,
+            telefono = form.telefono,
+            direccion = form.direccion,
+            ciudad = form.ciudad,
+            provincia = form.provincia,
+            pais = form.pais,
+            codigo_postal = form.codigo_postal
+        )
+        db.add(nuevo_usuario)
+        db.commit()    
+        db.refresh(nuevo_usuario)
+        retorno = ("ingresar.html", None)       
+        return retorno
+    
+
+async def logueo_usuario(request, db):
+    form = RegistroForm(request)
+    await form.get_data()
+    usuario = modelos.User(username = form.username, password = form.password)
+    result = db.query(modelos.User).filter(modelos.User.username == usuario.username, modelos.User.password == usuario.password).first()    
+    if result:
+        nombre = result.nombre
+        mensaje = ("logueado.html", nombre)
+        return mensaje
+    else:
+        mje = "Usuario o contraseña incorrectos"     
+        mensaje =("ingresar.html", mje)
+        return mensaje
