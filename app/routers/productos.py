@@ -46,9 +46,13 @@ def cliente(request: Request):
 
 @router.post("/login")
 async def login(request: Request, db: Session = Depends(get_db)):    
-     mensaje = await logueo_usuario(request, db)
-     return templates.TemplateResponse(mensaje[0], {"request": request, "mensaje": mensaje[1]})
-    
+    retorno = await logueo_usuario(request, db)
+    access_token = retorno['access_token']
+    mje = retorno["mensaje"]
+    template = mje[0]
+    mensaje = mje[1]
+    return templates.TemplateResponse(template, {"request": request, "access_token": access_token,  "mensaje": mensaje})
+
 
 @router.get("/registrarse")
 def registrarse(request: Request):
@@ -58,7 +62,8 @@ def registrarse(request: Request):
 @router.post("/registro")
 async def registro(request: Request, db: Session = Depends(get_db)):
     retorno = await registro_usuario(request, db)
-    return templates.TemplateResponse(retorno[0], {"request": request, "mensaje": retorno[1]})
+    template, mensaje = retorno[0], retorno[1]
+    return templates.TemplateResponse(template, {"request": request, "mensaje": mensaje})
 
 
 

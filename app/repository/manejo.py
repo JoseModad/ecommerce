@@ -3,6 +3,9 @@ import os
 from app.db import modelos
 from app.schemas import RegistroForm, ProductoForm
 from app.hasing import Hash
+from app.token import create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES
+from datetime import timedelta
+
 
 
 async def guardar_producto(request, db):
@@ -51,7 +54,6 @@ async def registro_usuario(request, db):
         mensaje = "El usuario o email ya existen"
         retorno = ("registrarse.html", mensaje)
         return retorno
-
     else:         
         nuevo_usuario = modelos.User(
             username = form.username,
@@ -79,10 +81,11 @@ async def logueo_usuario(request, db):
     result = db.query(modelos.User).filter(modelos.User.username == form.username).first()
     if result and Hash.verify_password(form.password, result.password):
         nombre = result.nombre
-        mensaje = ("logueado.html", nombre)
-        return mensaje
+        mensaje = ("logueado.html", nombre)        
     else:
         mje = "Usuario o contraseña incorrectos"     
-        mensaje =("ingresar.html", mje)
-        return mensaje
+        mensaje =("ingresar.html", mje)    
+    access_token = create_access_token(data={"sub": result.username})
+    return {"access_token": access_token, "token_type": "bearer",  "mensaje": mensaje}
+
     

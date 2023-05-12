@@ -1,4 +1,5 @@
 from fastapi import Request, UploadFile
+from pydantic import BaseModel
 
 
 class RegistroForm:
@@ -61,3 +62,12 @@ class ProductoForm:
     # funcion para mostrar los datos en consola(borrar luego de la prueba)
     def __str__(self):
         return f"producto: {self.nombre_producto}\nprecio: {self.precio}\ndescripcion: {self.descripcion}\ncategoria: {self.categoria}\nmarca: {self.marca}\nstock: {self.stock}\nimagen: {self.imagen}"
+    
+    
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    username: str | None = None
