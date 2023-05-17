@@ -4,7 +4,16 @@ from fastapi.templating import Jinja2Templates
 from app.repository.manejo import guardar_producto, consultastockproducto, registro_usuario, logueo_usuario
 from app.db.database import get_db
 from sqlalchemy.orm import Session
-# from app.db import modelos
+from app.db import modelos
+from typing import Annotated
+from app.schemas import RegistroForm
+from app.oauth import get_current_user
+from fastapi.security import OAuth2PasswordRequestForm
+
+
+
+
+
 
 router = APIRouter(include_in_schema = False)
 
@@ -13,13 +22,13 @@ templates = Jinja2Templates(directory="app/templates")
 
 # funcion usada para crear las tablas de la base de datos. se usara mas adelante para el panel de administracion
 
-# @router.get("/usuarios")
-# def ruta(db: Session = Depends(get_db)):
-#     usuarios = db.query(modelos.User).all()
-#     productos = db.query(modelos.Producto).all()
-#     print(usuarios)
-#     print(productos)
-#     return usuarios, productos   
+@router.get("/administracion")
+def ruta(usuario = OAuth2PasswordRequestForm, db: Session = Depends(get_db), current_user: RegistroForm =Depends(get_current_user)):
+    usuarios = db.query(modelos.User).all()
+    productos = db.query(modelos.Producto).all()
+    print(usuarios)
+    print(productos)
+    return usuarios, productos   
 
 
 # Funciones para el panel de Usuario
